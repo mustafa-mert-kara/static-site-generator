@@ -1,5 +1,5 @@
 from textnode import *
-from fileoperations import generate_page
+from fileoperations import generate_pages_recursive
 import os
 import shutil
 from pathlib import Path
@@ -27,7 +27,7 @@ def build_file_structure(root,destination):
 def main():
     cwd=Path(__file__).parent.parent
     build_file_structure(os.path.join(cwd,"static"),os.path.join(cwd,"public"))
-    generate_page(os.path.join(cwd,"content","index.md"),os.path.join(cwd,"template.html"),os.path.join(cwd,"public","index.html"))
+    generate_pages_recursive(os.path.join(cwd,"content"),os.path.join(cwd,"template.html"),os.path.join(cwd,"public"))
 
 if __name__=="__main__":
     main()

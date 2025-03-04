@@ -94,7 +94,19 @@ the **same** even with inline stuff
             html,
             "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
         )
+    def test_link_generation(self):
+        md="""
+## Blog posts
 
+- [Why Glorfindel is More Impressive than Legolas](/blog/glorfindel)
+- [Why Tom Bombadil Was a Mistake](/blog/tom)
+"""
+        node=markdown_to_html_node(md)
+        html=node.to_html()
+        self.assertEqual(
+            html,
+            "<div><h2>Blog posts</h2><ul><li><a href=\"/blog/glorfindel\">Why Glorfindel is More Impressive than Legolas</a></li><li><a href=\"/blog/tom\">Why Tom Bombadil Was a Mistake</a></li></ul></div>",
+        )
 
 
 
