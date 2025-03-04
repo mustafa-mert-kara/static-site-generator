@@ -23,8 +23,8 @@ def generate_page(from_path, template_path, dest_path,base_path):
     template=f"{split_template[0]}{title}{split_template[1]}"
     split_template=template.split("{{ Content }}")
     template=f"{split_template[0]}{html_string}{split_template[1]}"
-    template.replace("""href="/""","""href="{BASEPATH}""")
-    template.replace("""src="/""","""src="{BASEPATH}""")
+    template=template.replace("href=\"/",f"href=\"{base_path}")
+    template=template.replace("src=\"/",f"src=\"{base_path}")
     fp=open(dest_path,"w+")
     fp.write(template)
     fp.close()
