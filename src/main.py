@@ -3,7 +3,7 @@ from fileoperations import generate_pages_recursive
 import os
 import shutil
 from pathlib import Path
-
+import sys
 
 
 def move_files(root,destination):    
@@ -25,9 +25,16 @@ def build_file_structure(root,destination):
     move_files(root,destination)
 
 def main():
+    arg=sys.argv
+    if arg is None or len(arg)==1:
+        root="/"
+    else:
+        root=arg[1]
+    print(root)
+
     cwd=Path(__file__).parent.parent
-    build_file_structure(os.path.join(cwd,"static"),os.path.join(cwd,"public"))
-    generate_pages_recursive(os.path.join(cwd,"content"),os.path.join(cwd,"template.html"),os.path.join(cwd,"public"))
+    build_file_structure(os.path.join(cwd,"static"),os.path.join(cwd,"docs"))
+    generate_pages_recursive(os.path.join(cwd,"content"),os.path.join(cwd,"template.html"),os.path.join(cwd,"docs"),root)
 
 if __name__=="__main__":
     main()
