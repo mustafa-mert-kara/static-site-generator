@@ -19,12 +19,10 @@ def generate_page(from_path, template_path, dest_path,base_path):
     html_node=markdown_to_html_node(markdown)
     html_string=html_node.to_html()
     title=extract_title(markdown)
-    split_template=template.split("""{{ Title }}""")
-    template=f"{split_template[0]}{title}{split_template[1]}"
-    split_template=template.split("{{ Content }}")
-    template=f"{split_template[0]}{html_string}{split_template[1]}"
-    template=template.replace("href=\"/",f"href=\"{base_path}")
-    template=template.replace("src=\"/",f"src=\"{base_path}")
+    template = template.replace("{{ Title }}", title)
+    template = template.replace("{{ Content }}", html_string)
+    template = template.replace('href="/', 'href="' + base_path)
+    template = template.replace('src="/', 'src="' + base_path)
     fp=open(dest_path,"w+")
     fp.write(template)
     fp.close()
