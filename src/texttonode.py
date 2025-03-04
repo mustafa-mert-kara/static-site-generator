@@ -64,7 +64,7 @@ def split_nodes_link(old_nodes):
     return new_nodes
 
 def text_to_textnode(text):
-    old_node=TextNode(text,TextType.TEXT)
+    old_node=TextNode(text.strip().strip("\n").replace("\n"," "),TextType.TEXT)
     new_node=split_nodes_delimiter([old_node],"**",TextType.BOLD)
     
     new_node=split_nodes_delimiter(new_node,"_",TextType.ITALIC)
@@ -76,4 +76,7 @@ def text_to_textnode(text):
     new_node=split_nodes_link(new_node)
 
     return new_node
+
+
+
 
