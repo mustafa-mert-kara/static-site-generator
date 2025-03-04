@@ -26,7 +26,11 @@ class LeafNode(HTMLNode):
             raise ValueError("No Value Detected")
         if self.tag==None or self.tag=="":
             return self.value
-        return f"<{self.tag}>{self.value}</{self.tag}>"
+        if self.props is not None:
+            prop_text=self.props_to_html()
+            return f"<{self.tag}{prop_text}>{self.value}</{self.tag}>"
+        else:
+            return f"<{self.tag}>{self.value}</{self.tag}>"
 
 class ParentNode(HTMLNode):
     def __init__(self, tag, children, props=None):

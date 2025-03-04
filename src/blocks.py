@@ -53,7 +53,7 @@ def markdown_to_html_node(markdown):
                 block_parent=ParentNode(f"h{str(headin_tier)}",children_of_blocks)
                 Parent_of_blocks.append(block_parent)
             case  BlockType.QUOTE:
-                children_of_blocks=text_to_children(block[1:])
+                children_of_blocks=text_to_children(block.replace(">","").replace("\n",""))
                 block_parent=ParentNode("blockquote",children_of_blocks)
                 Parent_of_blocks.append(block_parent)
             case  BlockType.ULIST:
@@ -61,14 +61,14 @@ def markdown_to_html_node(markdown):
                 children_of_blocks=[]
                 for item in list_items:
                     item_nodes=text_to_children(item[1:])
-                    children_of_blocks.append(Parent_of_blocks("li",item_nodes))
+                    children_of_blocks.append(ParentNode("li",item_nodes))
                 Parent_of_blocks.append(ParentNode("ul",children_of_blocks))
             case  BlockType.OLIST:
                 list_items=block.split("\n")
                 children_of_blocks=[]
                 for item in list_items:
                     item_nodes=text_to_children(item[2:])
-                    children_of_blocks.append(Parent_of_blocks("li",item_nodes))
+                    children_of_blocks.append(ParentNode("li",item_nodes))
                 Parent_of_blocks.append(ParentNode("ol",children_of_blocks))
             case  BlockType.CODE:
                 code_text=block[3:-3]
