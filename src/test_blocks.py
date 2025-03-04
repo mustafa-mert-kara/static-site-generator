@@ -34,8 +34,8 @@ This is the same paragraph on a new line
 - with items
         """
         blocks = markdown_to_blocks(md)
-        blockTypes=list(map(block_to_blocktype,blocks))
-        self.assertListEqual(blockTypes,[
+        block_types=list(map(block_to_blocktype,blocks))
+        self.assertListEqual(block_types,[
              BlockType.PARAGRAPH,
              BlockType.PARAGRAPH,
              BlockType.ULIST

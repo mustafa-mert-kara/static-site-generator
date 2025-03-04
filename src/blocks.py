@@ -22,7 +22,7 @@ def block_to_blocktype(block):
         return None
     if block[0]=="#":
         return BlockType.HEADING
-    elif block[:3]=="```" and block[-3:]=="```":
+    elif block.startswith("```") and block.endswith("```"):
         return BlockType.CODE
     elif block[0]==">":
         return BlockType.QUOTE
@@ -36,8 +36,7 @@ def block_to_blocktype(block):
 
 def markdown_to_html_node(markdown):
     blocks=markdown_to_blocks(markdown)
-    html_code=""
-    
+        
     Parent_of_blocks=[]
     for block in blocks:
         match block_to_blocktype(block):
